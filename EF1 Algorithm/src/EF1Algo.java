@@ -12,9 +12,12 @@ public class EF1Algo {
 		for (int i = 0; i < agents; i++) { // creates list objects to hold each agent's allocations
 			allocations.add(new ArrayList<>());
 		}
-		int diff = items-agents;
-		while (items > diff ) { //check that # of items doesn't reach 0
+		
+		while (items > 0 ) { //check that # of items doesn't reach 0
 			for (int i = 0; i < agents; i++) {
+				if( items == 0) {
+					break;
+				}
 				int bestIndex = findBestItem(agentValues.get(i));
 				int bestVal = agentValues.get(i).get(bestIndex);
 				allocations.get(i).add(bestVal); // adds best item to allocation list
@@ -45,8 +48,13 @@ public class EF1Algo {
 
 	public void printAllocations(List<List<Integer>> allocations) {
 		for (List<Integer> agentI : allocations) {
-			for (int val : agentI) {
-				System.out.print(val + ", ");
+			for (int i = 0; i < agentI.size(); i++) {
+				int val = agentI.get(i);
+				if( i < agentI.size()-1 ) {
+					System.out.print(val + ", ");
+				}else {
+					System.out.print(val);
+				}
 			}
 			System.out.println();
 		}

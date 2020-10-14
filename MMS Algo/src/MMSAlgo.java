@@ -25,7 +25,7 @@ public class MMSAlgo {
 				for (int j = 0; j < items; j++) {
 					int tempVal = agentValues.get(i).get(j);
 					
-					if( tempVal >= aveVals.get(i) ) { //checks if agent valuation is greater than average/2
+					if( tempVal >= aveVals.get(i)/2 ) { //checks if agent valuation is greater than average/2
 						allocations.get(agentNum).add(tempVal);
 						
 						for (int x = 0; x < agents; x++) {

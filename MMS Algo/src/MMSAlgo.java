@@ -45,10 +45,39 @@ public class MMSAlgo {
 			}
 
 		}
+
+		//step 3
+		while (items > 0) { // check that # of items doesn't reach 0
+			for (int i = 0; i < allocations.size() ; i++) {
+				if (items == 0) {
+					break;
+				}
+				
+				if( allocations.get(i).size()==0 ) {
+					int bestIndex = findBestItem(agentValues.get(i));
+					int bestVal = agentValues.get(i).get(bestIndex);
+					allocations.get(i).add(bestVal); // adds best item to allocation list
+	
+					for (int x = 0; x < agents; x++) {
+						agentValues.get(x).remove(bestIndex); // removes item from other agent's lists
+					}
+					--items;
+				}
+			}
+		}
 		
 		printAllocations( allocations );
+	}
+	
+	public Integer findBestItem(List<Integer> agentI) { // iterates through agent's list of values to find the best item
+		int maxIndex = 0;
 
-		
+		for (int i = 1; i < agentI.size(); i++) {
+			if (agentI.get(maxIndex) < agentI.get(i)) {
+				maxIndex = i;
+			}
+		}
+		return maxIndex;
 	}
 
 	public void printAllocations(List<List<Integer>> allocations) {
